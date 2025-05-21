@@ -1,34 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">{{ article.title }}</h1>
+            <div class="flex space-x-2">
+                <a href="{{ path('app_article_index') }}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                    <i class="fas fa-arrow-left mr-2"></i>Retour à la liste
+                </a>
+                <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-200">
+                    <i class="fas fa-edit mr-2"></i>Modifier
+                </a>
+            </div>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ article.content }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-800">Détails de l'article</h2>
+            </div>
+            <div class="divide-y divide-gray-200">
+                <div class="px-6 py-4 flex">
+                    <div class="w-1/4 font-medium text-gray-500">ID</div>
+                    <div class="w-3/4 text-gray-900">{{ article.id }}</div>
+                </div>
+                <div class="px-6 py-4 flex">
+                    <div class="w-1/4 font-medium text-gray-500">Titre</div>
+                    <div class="w-3/4 text-gray-900">{{ article.title }}</div>
+                </div>
+                <div class="px-6 py-4 flex">
+                    <div class="w-1/4 font-medium text-gray-500">Date de création</div>
+                    <div class="w-3/4 text-gray-900">{{ article.createdAt ? article.createdAt|date('d/m/Y à H:i') : '' }}</div>
+                </div>
+                <div class="px-6 py-4 flex">
+                    <div class="w-1/4 font-medium text-gray-500">Contenu</div>
+                    <div class="w-3/4 text-gray-900 whitespace-pre-line">{{ article.content }}</div>
+                </div>
+            </div>
+        </div>
 
-    <a href="{{ path('app_article_index') }}">back to list</a>
-
-    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-
-    {{ include('article/_delete_form.html.twig') }}
+        <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-800">Actions</h2>
+            </div>
+            <div class="px-6 py-4 flex justify-between items-center">
+                <div class="text-sm text-gray-500">
+                    <i class="fas fa-exclamation-triangle text-yellow-500 mr-1"></i>
+                    Zone de danger
+                </div>
+                {{ include('article/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

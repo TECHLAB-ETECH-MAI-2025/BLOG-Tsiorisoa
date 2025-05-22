@@ -5,9 +5,9 @@
 {% block body %}
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Comment Management</h1>
+        <h1 class="text-3xl font-bold text-gray-800">Votre commentaire</h1>
         <a href="{{ path('app_comment_new') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-200">
-            Create New Comment
+            Nouveau commentaire
         </a>
     </div>
 
@@ -15,30 +15,30 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Content</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    {# <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th> #}
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cmmentaire</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 {% for comment in comments %}
                 <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ comment.id }}</td>
+                    {# <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ comment.id }}</td> #}
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ comment.author }}</td>
                     <td class="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">{{ comment.content }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div class="flex space-x-2">
-                            <a href="{{ path('app_comment_show', {'id': comment.id}) }}" class="text-indigo-600 hover:text-indigo-900">Show</a>
-                            <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="text-green-600 hover:text-green-900">Edit</a>
+                            {# <a href="{{ path('app_comment_show', {'id': comment.id}) }}" class="text-indigo-600 hover:text-indigo-900">Plus Details</a> #}
+                            <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="text-green-600 hover:text-green-900">Modifier le commentaire</a>
                         </div>
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">No comments found</td>
+                    <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">Pas de commentaire</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,0 +1,35 @@
+{# templates/blog/index.html.twig #}
+
+{% block content %}
+    <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+            {# Titre du blog #}
+            <div class="text-center mb-12">
+                <h1 class="text-xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                    Mon Blog
+                </h1>
+            </div>
+            <div class="mb-12 bg-white shadow overflow-hidden sm:rounded-lg p-6">
+                {{ render(controller('App\\Controller\\ArticleController::new')) }}
+                {{ render(controller('App\\Controller\\CommentController::new')) }}          
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vous pouvez ajouter des customizations Tailwind ici -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}
